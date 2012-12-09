@@ -1,6 +1,10 @@
-= has_uuid
+# has_uuid
 
-Description goes here.
+A gem to help you retrofit UUIDs to your existing Rails application.
+
+# Status
+
+Nothing to see here. Not ready for prime time yet.
 
 == Contributing to has_uuid
  
