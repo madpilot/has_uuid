@@ -5,7 +5,7 @@ module HasUuid
         def uuid(*column_names)
           options = column_names.extract_options!
           column_names.each do |name|
-            type = 'binary(16)'
+            type = @base.adapter_name.downcase == 'postgresql' ? 'uuid' : 'binary(16)'
             column(name, "#{type}", options)
           end
         end

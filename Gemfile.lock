@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/jashmenn/activeuuid.git
+  revision: 423bc583b6e76f57ce105793e6bd069b2a5886c7
+  specs:
+    activeuuid (0.3.0)
+      activerecord (>= 3.1)
+      uuidtools
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -33,6 +41,7 @@ GEM
       mocha (= 0.10.5)
     builder (3.0.4)
     coderay (1.0.8)
+    database_cleaner (0.7.2)
     erubis (2.7.0)
     git (1.2.5)
     guard (1.5.4)
@@ -126,7 +135,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activeuuid!
   bundler
+  database_cleaner
   guard
   guard-test
   jeweler

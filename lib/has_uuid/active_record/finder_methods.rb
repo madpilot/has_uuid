@@ -8,12 +8,11 @@ module HasUuid
         super
       end
 
-      # :nocov:
       def find_some(ids)
         if ids.length > 0 && ids.inject(true) { |r, id| r && (id.is_a?(::UUIDTools::UUID) || id.to_s =~ VALID_FORMAT) }
           uuids = ids.map do |id|
             id = ::UUIDTools::UUID.parse(id) if id.is_a?(String)
-            id.raw
+            id
           end
           result = where(table[:uuid].in(uuids)).all
         

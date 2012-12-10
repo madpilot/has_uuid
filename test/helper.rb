@@ -20,10 +20,13 @@ require 'mocha'
 require 'thread'
 require 'sqlite3'
 require 'rails/all'
+require 'database_cleaner'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'has_uuid'
+
+DatabaseCleaner.strategy = :transaction
 
 class TestApp < Rails::Application
   config.root = File.dirname(__FILE__)
@@ -32,6 +35,7 @@ end
 Rails.application = TestApp
 HasUuid::Railtie.initializers.first.run(Rails.application)
 ActiveRecord::Migration.verbose = false
+#ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 class SetupDatabase < ActiveRecord::Migration
   def up
@@ -122,5 +126,13 @@ class Test::Unit::TestCase
     })
     Arel::Table.engine = Arel::Sql::Engine.new(ActiveRecord::Base)
     SetupDatabase.migrate(:up)
+  end
+
+  teardown do
+    DatabaseCleaner.start
+  end
+
+  teardown do
+    DatabaseCleaner.clean
   end
 end
