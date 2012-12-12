@@ -17,6 +17,18 @@ module HasUuid
         cattr_accessor :has_uuid_options
         self.has_uuid_options = options
         options[:primary_uuid] ||= :uuid
+
+        if options[:primary_uuid] != :uuid
+          class_eval do
+            def uuid
+              self.send self.class.primary_uuid
+            end
+
+            def uuid=(uuid)
+              self.send "#{self.class.primary_uuid}=".to_sym, uuid
+            end
+          end
+        end
       end
     end
 
@@ -36,8 +48,8 @@ module HasUuid
   end
 
   def self.check_uuid(klass)
-    return false if klass.uuid && klass.id && klass.class.where('uuid = ?', klass.uuid).where('id <> ?', klass.id).count > 0
-    return false if klass.uuid && klass.new_record? && klass.class.where('uuid = ?', klass.uuid).count > 0
+    return false if klass.uuid && klass.id && klass.class.where("#{klass.class.primary_uuid} = ?", klass.uuid).where('id <> ?', klass.id).count > 0
+    return false if klass.uuid && klass.new_record? && klass.class.where("#{klass.class.primary_uuid} = ?", klass.uuid).count > 0
     return true
   end
 end

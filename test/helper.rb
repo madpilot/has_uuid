@@ -7,6 +7,12 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
+require 'simplecov'
+SimpleCov.command_name 'Unit Tests'
+SimpleCov.start do
+  add_filter "/test/" 
+end
+
 require 'test/unit'
 require 'shoulda'
 
@@ -108,7 +114,7 @@ class Album < ActiveRecord::Base
 end
 
 class Artist < ActiveRecord::Base
-  has_uuid :primary_uuid => :artist_identitifer
+  has_uuid :primary_uuid => :artist_identifier
   has_many :record_companies, :through => :albums
 end
 

@@ -8,7 +8,7 @@ module HasUuid
           if record.class.respond_to?(:has_uuid?) && record.class.has_uuid?
             if foreign_uuid_present?
               if record
-                owner[reflection.foreign_uuid] = ::UUIDTools::UUID.parse_raw(record[reflection.association_uuid_key(record.class)])
+                owner[reflection.foreign_uuid] = record[reflection.association_uuid_key(record.class)]
               else
                 owner[reflections.foreign_uuid] = nil
               end
