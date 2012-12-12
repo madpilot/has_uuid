@@ -1,38 +1,6 @@
 module HasUuid
   VALID_FORMAT = /^([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{2})([0-9a-f]{2})-([0-9a-f]{12})$/
  
-  module Column
-    extend ActiveSupport::Concern
-    
-    included do
-      def type_cast_with_thing(value)
-        puts "#{type}(#{type.class}) #{value}"
-        type_cast_without_thing(value)
-      end
-
-      alias_method_chain :type_cast, :thing
-    end
-  end
-
-  module Quoting
-    extend ActiveSupport::Concern
-
-    included do
-      def quote_with_thing(value, column = nil)
-          puts "quote #{column.type}(#{column.type.class}) #{value}" if column
-          quote_without_thing(value, column)
-      end
-
-      def type_cast_with_thing(value, column = nil)
-          puts "type cast #{column.type}(#{column.type.class}) #{value}" if column
-          type_cast_without_thing(value, column)
-      end
-
-      alias_method_chain :quote, :thing
-      alias_method_chain :type_cast, :thing
-    end
-  end
-
   module ActiveRecord
     module FinderMethods
       def find_one(id)
