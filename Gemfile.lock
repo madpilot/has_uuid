@@ -1,6 +1,5 @@
-GIT
-  remote: git://github.com/jashmenn/activeuuid.git
-  revision: 423bc583b6e76f57ce105793e6bd069b2a5886c7
+PATH
+  remote: ../activeuuid
   specs:
     activeuuid (0.3.0)
       activerecord (>= 3.1)

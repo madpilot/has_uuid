@@ -1,7 +1,8 @@
 source "http://rubygems.org"
 
 gem "uuidtools"
-gem "activeuuid", :git => 'git://github.com/jashmenn/activeuuid.git'
+#gem "activeuuid", :git => 'git://github.com/jashmenn/activeuuid.git'
+gem "activeuuid", :path => '../activeuuid'
 
 group :development do
   gem "simplecov", :require => false

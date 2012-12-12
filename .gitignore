@@ -1,7 +1,7 @@
 # rcov generated
 coverage
 coverage.data
-
+test/debug.log
 # rdoc generated
 rdoc
 

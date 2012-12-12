@@ -26,16 +26,18 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'has_uuid'
 
-DatabaseCleaner.strategy = :transaction
-
 class TestApp < Rails::Application
   config.root = File.dirname(__FILE__)
 end
 
 Rails.application = TestApp
 HasUuid::Railtie.initializers.first.run(Rails.application)
+
+ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + "/debug.log")
 ActiveRecord::Migration.verbose = false
-#ActiveRecord::Base.logger = Logger.new(STDOUT)
+ActiveRecord::Base.configurations = YAML::load(File.read(File.dirname(__FILE__) + "/config/database.yml"))
+ActiveRecord::Base.establish_connection(ENV["DB"] || "sqlite3")
+DatabaseCleaner.strategy = :transaction
 
 class SetupDatabase < ActiveRecord::Migration
   def up

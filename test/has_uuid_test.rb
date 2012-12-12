@@ -1,4 +1,5 @@
 require 'helper'
+require 'sqlite3'
 
 class TestHasUuid < Test::Unit::TestCase
   context 'has_uuid' do
@@ -60,8 +61,6 @@ class TestHasUuid < Test::Unit::TestCase
       assert_same_elements arr, labels
     end
 
-
-
     should 'allow you to search via uuid string as an id' do
       uuid = UUIDTools::UUID.random_create
       label = RecordLabel.create!(:name => 'Agit-Prop Records', :uuid => uuid.to_s)
@@ -72,12 +71,6 @@ class TestHasUuid < Test::Unit::TestCase
       uuid = UUIDTools::UUID.random_create
       label = RecordLabel.create!(:name => 'All About Records', :uuid => uuid)
       assert_equal label, RecordLabel.where('uuid = ?', uuid).first
-    end
-
-    should 'allow you to search via arel where uuid query is a string' do
-      uuid = UUIDTools::UUID.random_create
-      label = RecordLabel.create!(:name => 'All the Madmen', :uuid => uuid)
-      assert_equal label, RecordLabel.where('uuid = ?', uuid.to_s).first
     end
 
     should 'ensure uuid is unique' do
