@@ -108,7 +108,7 @@ end
 
 class Album < ActiveRecord::Base
   has_uuid
-  belongs_to :record_company
+  belongs_to :record_label
   belongs_to :artist
   has_many :songs
 end

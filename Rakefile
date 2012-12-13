@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "has_uuid"
   gem.homepage = "http://github.com/madpilot/has_uuid"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{A gem to help you retrofit UUIDs to your existing Rails application. }
+  gem.description = %Q{A gem to help you retrofit UUIDs to your existing Rails application. }
   gem.email = "myles@madpilot.com.au"
   gem.authors = ["Myles Eftos"]
   # dependencies defined in Gemfile

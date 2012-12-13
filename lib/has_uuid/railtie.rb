@@ -3,8 +3,12 @@ module HasUuid
     initializer 'has_uuid' do |app|
       ActiveSupport.on_load :active_record do
         ::ActiveRecord::Relation.send :include, HasUuid::ActiveRecord::FinderMethods
-        ::ActiveRecord::Reflection::AssociationReflection.send :include, HasUuid::ActiveRecord::AssociationReflection
+        ::ActiveRecord::Reflection::AssociationReflection.send :include, HasUuid::ActiveRecord::Reflection::AssociationReflection
         ::ActiveRecord::Associations::BelongsToAssociation.send :include, HasUuid::ActiveRecord::BelongsToAssociation
+        ::ActiveRecord::Associations::SingularAssociation.send :include, HasUuid::ActiveRecord::Associations::SingularAssociation
+        ::ActiveRecord::Associations::CollectionAssociation.send :include, HasUuid::ActiveRecord::Associations::CollectionAssociation
+        ::ActiveRecord::Associations::Builder::SingularAssociation.send :include, HasUuid::ActiveRecord::Associations::Builder::SingularAssociation
+        ::ActiveRecord::Associations::Builder::CollectionAssociation.send :include, HasUuid::ActiveRecord::Associations::Builder::CollectionAssociation
         ::ActiveRecord::Base.send :include, HasUuid
       end
       

@@ -6,7 +6,6 @@ module HasUuid
   def self.included(base)
     base.send :extend, ClassMethods
     base.class_eval do
-      include ActiveUUID::UUID
       include InstanceMethods
     end
   end
@@ -20,6 +19,8 @@ module HasUuid
 
         if options[:primary_uuid] != :uuid
           class_eval do
+            include ActiveUUID::UUID
+
             def uuid
               self.send self.class.primary_uuid
             end
@@ -56,6 +57,10 @@ end
 
 require File.join(File.dirname(__FILE__), 'has_uuid', 'active_record', 'connection_adapters', 'migration.rb')
 require File.join(File.dirname(__FILE__), 'has_uuid', 'active_record', 'finder_methods.rb')
-require File.join(File.dirname(__FILE__), 'has_uuid', 'active_record', 'association_reflection.rb')
+require File.join(File.dirname(__FILE__), 'has_uuid', 'active_record', 'reflection.rb')
+require File.join(File.dirname(__FILE__), 'has_uuid', 'active_record', 'associations', 'singular_association.rb')
+require File.join(File.dirname(__FILE__), 'has_uuid', 'active_record', 'associations', 'collection_association.rb')
+require File.join(File.dirname(__FILE__), 'has_uuid', 'active_record', 'associations', 'builder', 'collection_association.rb')
+require File.join(File.dirname(__FILE__), 'has_uuid', 'active_record', 'associations', 'builder', 'singular_association.rb')
 require File.join(File.dirname(__FILE__), 'has_uuid', 'active_record', 'belongs_to_association.rb')
 require File.join(File.dirname(__FILE__), 'has_uuid', 'railtie.rb')
