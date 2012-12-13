@@ -5,9 +5,6 @@ require 'activeuuid'
 module HasUuid
   def self.included(base)
     base.send :extend, ClassMethods
-    base.class_eval do
-      include InstanceMethods
-    end
   end
   
   module ClassMethods
@@ -30,21 +27,23 @@ module HasUuid
             end
           end
         end
+
+        class_eval do
+          before_create :generate_uuids_if_needed
+          
+          def generate_uuids_if_needed
+            unless self.uuid
+              begin
+                self.uuid = UUIDTools::UUID.random_create 
+              end while !HasUuid.check_uuid(self)
+            end
+          end
+        end
       end
     end
 
     def primary_uuid
       self.has_uuid_options[:primary_uuid]
-    end
-  end
-
-  module InstanceMethods
-    def generate_uuids_if_needed
-      unless self.uuid
-        begin
-          self.uuid = UUIDTools::UUID.random_create 
-        end while !HasUuid.check_uuid(self)
-      end
     end
   end
 
