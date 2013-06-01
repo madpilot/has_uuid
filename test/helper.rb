@@ -21,7 +21,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'test/unit'
 require 'shoulda'
-require 'mocha'
+require 'mocha/setup'
 
 require 'thread'
 require 'sqlite3'

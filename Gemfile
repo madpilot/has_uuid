@@ -7,7 +7,7 @@ group :development do
   gem "simplecov", :require => false
   gem "jeweler"
   gem "bundler"
-  gem "rdoc"
+  gem "rdoc", "~> 3.4"
   gem "guard"
   gem "guard-test"
   gem "rb-fsevent"
@@ -17,7 +17,7 @@ group :test do
   gem "database_cleaner"
   gem "shoulda"
   gem "sqlite3"
-  gem "rails"
+  gem "rails", "~> 3.2.13"
   gem "mocha"
   gem "rake"
 end

@@ -11,7 +11,7 @@ module HasUuid
               end
             else
               column  = "#{reflection.quoted_table_name}.#{reflection.association_primary_uuid}"
-              scope.pluck(column)
+              association_scope.pluck(column)
             end
           end
 
