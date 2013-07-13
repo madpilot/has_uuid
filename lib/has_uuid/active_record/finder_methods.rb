@@ -6,7 +6,7 @@ module HasUuid
       def find_one(id)
         if id.is_a?(::UUIDTools::UUID) || id.to_s =~ VALID_FORMAT
           id = ::UUIDTools::UUID.parse(id) if id.is_a?(String)
-          return self.find_by_uuid(id) 
+          return self.find_by_uuid!(id) 
         end
         super
       end

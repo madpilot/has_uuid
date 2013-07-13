@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Myles Eftos"]
-  s.date = "2012-12-12"
-  s.description = "TODO: longer description of your gem"
+  s.date = "2013-06-01"
+  s.description = "A gem to help you retrofit UUIDs to your existing Rails application. "
   s.email = "myles@madpilot.com.au"
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -25,13 +25,21 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
+    "has_uuid.gemspec",
     "lib/has_uuid.rb",
-    "lib/has_uuid/active_record/association_reflection.rb",
+    "lib/has_uuid/active_record/associations/builder/collection_association.rb",
+    "lib/has_uuid/active_record/associations/builder/singular_association.rb",
+    "lib/has_uuid/active_record/associations/collection_association.rb",
+    "lib/has_uuid/active_record/associations/singular_association.rb",
     "lib/has_uuid/active_record/belongs_to_association.rb",
     "lib/has_uuid/active_record/connection_adapters/migration.rb",
     "lib/has_uuid/active_record/finder_methods.rb",
+    "lib/has_uuid/active_record/reflection.rb",
     "lib/has_uuid/railtie.rb",
+    "test/belongs_to_test.rb",
     "test/config/database.yml",
+    "test/finder_test.rb",
+    "test/has_many_test.rb",
     "test/has_uuid_test.rb",
     "test/helper.rb",
     "test/railtie_test.rb"
@@ -40,7 +48,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.24"
-  s.summary = "TODO: one-line summary of your gem"
+  s.summary = "A gem to help you retrofit UUIDs to your existing Rails application."
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -51,7 +59,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<simplecov>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
-      s.add_development_dependency(%q<rdoc>, [">= 0"])
+      s.add_development_dependency(%q<rdoc>, ["~> 3.4"])
       s.add_development_dependency(%q<guard>, [">= 0"])
       s.add_development_dependency(%q<guard-test>, [">= 0"])
       s.add_development_dependency(%q<rb-fsevent>, [">= 0"])
@@ -61,7 +69,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<simplecov>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<bundler>, [">= 0"])
-      s.add_dependency(%q<rdoc>, [">= 0"])
+      s.add_dependency(%q<rdoc>, ["~> 3.4"])
       s.add_dependency(%q<guard>, [">= 0"])
       s.add_dependency(%q<guard-test>, [">= 0"])
       s.add_dependency(%q<rb-fsevent>, [">= 0"])
@@ -72,7 +80,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<simplecov>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<bundler>, [">= 0"])
-    s.add_dependency(%q<rdoc>, [">= 0"])
+    s.add_dependency(%q<rdoc>, ["~> 3.4"])
     s.add_dependency(%q<guard>, [">= 0"])
     s.add_dependency(%q<guard-test>, [">= 0"])
     s.add_dependency(%q<rb-fsevent>, [">= 0"])
