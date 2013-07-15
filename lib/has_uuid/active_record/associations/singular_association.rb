@@ -5,8 +5,8 @@ module HasUuid
         extend ActiveSupport::Concern
         included do
           def uuid_writer(uuid)
-            replace(klass.find(uuid)) unless uuid.nil?
-            replace(nil) if uuid.nil?
+            replace(klass.find(uuid)) unless uuid.nil? || uuid.empty?
+            replace(nil) if uuid.nil? || uuid.empty?
           end
 
           def uuid_reader(force_reload = false)
