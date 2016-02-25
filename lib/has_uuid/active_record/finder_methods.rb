@@ -1,12 +1,12 @@
 module HasUuid
   VALID_FORMAT = /^([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{2})([0-9a-f]{2})-([0-9a-f]{12})$/
- 
+
   module ActiveRecord
     module FinderMethods
       def find_one(id)
         if id.is_a?(::UUIDTools::UUID) || id.to_s =~ VALID_FORMAT
           id = ::UUIDTools::UUID.parse(id) if id.is_a?(String)
-          return self.find_by_uuid!(id) 
+          return self.find_by_uuid!(id)
         end
         super
       end
@@ -17,8 +17,14 @@ module HasUuid
             id = ::UUIDTools::UUID.parse(id) if id.is_a?(String)
             id
           end
-          result = where(table[:uuid].in(uuids)).all
-        
+
+          arr = where(table[:uuid].in(uuids))
+          if ::ActiveRecord::VERSION::MAJOR >= 4
+            result = arr.load
+          else
+            result = arr.all
+          end
+
           expected_size =
             if @limit_value && ids.size > @limit_value
               @limit_value

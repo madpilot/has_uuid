@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "uuidtools"
-gem "activeuuid", :git => 'git://github.com/madpilot/activeuuid.git'
+gem "activeuuid"
 
 group :development do
   gem "simplecov", :require => false
@@ -17,7 +17,12 @@ group :test do
   gem "database_cleaner"
   gem "shoulda"
   gem "sqlite3"
-  gem "rails", "~> 3.2.13"
+
+  if ENV["RAILS_VERSION"]
+    gem "rails", "~> #{ENV["RAILS_VERSION"]}"
+  else
+    gem "rails", "~> 3.2.13"
+  end
   gem "mocha"
   gem "rake"
 end
