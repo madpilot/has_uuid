@@ -20,7 +20,7 @@ _NOTE_ The name of the gem is *rails_has_uuid* because has_uuid was already take
 
 Via Gemfile:
 
-```gem 'rails_has_uuid'```
+```gem 'rails_has_uuid', require: 'has_uuid'```
 
 On the commandline
 
@@ -50,7 +50,7 @@ class SetupDatabase < ActiveRecord::Migration
 end
 ```
 
-has_uuid adds a uuid type to mirations. On SQLite and MySQL it's a binary(16), on PostgreSQL it uses their native uuid type. Notice how we have both a 
+has_uuid adds a uuid type to mirations. On SQLite and MySQL it's a binary(16), on PostgreSQL it uses their native uuid type. Notice how we have both a
 record_label_id and record_label_uuid column...
 
 ###Model
@@ -69,7 +69,7 @@ end
 
 By calling the has_uuid class method, your model is primed.
 
-### Finders    
+### Finders
 
 ```ruby
 record_label = RecordLabel.create!(:name => 'Fat Wreck Chords')
@@ -85,9 +85,9 @@ RecordLabel.find(UUIDTools::UUID.parse('cf1ba930-6946-4bd5-9265-d9043e5dbb93'), 
 ...will return an array of objects that match those ids
 
 ### Relationships
-```ruby    
+```ruby
 record_label = RecordLabel.create!(:name => 'Fat Wreck Chords')
-artist_1 = Artist.create!(:name => 'NOFX') 
+artist_1 = Artist.create!(:name => 'NOFX')
 
 artist.record_label = record_label
 artist.record_label_uuid
@@ -98,7 +98,7 @@ Will return the uuid of the associated record label.
 The reverse is also true
 ```ruby
 record_label = RecordLabel.create!(:name => 'Fat Wreck Chords')
-artist_1 = Artist.create!(:name => 'NOFX') 
+artist_1 = Artist.create!(:name => 'NOFX')
 
 artist.record_label_uuid = record_label.uuid
 artist.record_label
@@ -110,7 +110,7 @@ Finally, it'll find the uuid when you associate via id
 i
 ```ruby
 record_label = RecordLabel.create!(:name => 'Fat Wreck Chords')
-artist_1 = Artist.create!(:name => 'NOFX') 
+artist_1 = Artist.create!(:name => 'NOFX')
 
 artist.record_label_id = record_label.id
 artist.record_label_uuid
@@ -125,7 +125,7 @@ uuid = UUIDTools::UUID.random_create
  => #<UUID:0x3fd4186240e0 UUID:7c9748da-f9fe-467e-bdb3-34ce2dc67605>
 
 record_label = RecordLabel.create!(:name => 'Fat Wreck Chords', :uuid => uuid)
-artist_1 = Artist.create!(:name => 'NOFX') 
+artist_1 = Artist.create!(:name => 'NOFX')
 
 artist.record_label_uuid = uuid.to
 # is the same as
@@ -136,9 +136,9 @@ artist.record_label_uuid = '7c9748da-f9fe-467e-bdb3-34ce2dc67605'
 
 ```ruby
 record_label = RecordLabel.create!(:name => 'Fat Wreck Chords')
-artist_1 = Artist.create!(:name => 'NOFX') 
-artist_2 = Artist.create!(:name => 'Strung Out') 
-artist_3 = Artist.create!(:name => 'Screeching Weasel') 
+artist_1 = Artist.create!(:name => 'NOFX')
+artist_2 = Artist.create!(:name => 'Strung Out')
+artist_3 = Artist.create!(:name => 'Screeching Weasel')
 
 record_label.artists = [ artist_1, artist_2, artist_3 ]
 record_label.save!
@@ -152,9 +152,9 @@ it also works the other way:
 
 ```ruby
 record_label = RecordLabel.create!(:name => 'Fat Wreck Chords')
-artist_1 = Artist.create!(:name => 'NOFX') 
-artist_2 = Artist.create!(:name => 'Strung Out') 
-artist_3 = Artist.create!(:name => 'Screeching Weasel') 
+artist_1 = Artist.create!(:name => 'NOFX')
+artist_2 = Artist.create!(:name => 'Strung Out')
+artist_3 = Artist.create!(:name => 'Screeching Weasel')
 
 record_label.artist_uuids = [ artist_1.uuid, artist_2.uuid, artist_3.uuid ]
 record_label.save!
@@ -168,9 +168,9 @@ Finally, if you set a relationship id, it will automatically fetch the uuid for 
 
 ```ruby
 record_label = RecordLabel.create!(:name => 'Fat Wreck Chords')
-artist_1 = Artist.create!(:name => 'NOFX') 
-artist_2 = Artist.create!(:name => 'Strung Out') 
-artist_3 = Artist.create!(:name => 'Screeching Weasel') 
+artist_1 = Artist.create!(:name => 'NOFX')
+artist_2 = Artist.create!(:name => 'Strung Out')
+artist_3 = Artist.create!(:name => 'Screeching Weasel')
 
 record_label.artist_ids = [ artist_1.uuid, artist_2.uuid, artist_3.uuid ]
 record_label.save!
@@ -196,13 +196,13 @@ Unfortunately, because of the way ARel works, you can only search via a UUIDTool
 
 ```ruby
 uuid = UUIDTools::UUID.random_create
- => #<UUID:0x3fd4186323c0 UUID:7cd2feb5-6929-4288-9ea4-c4e68927f289> 
+ => #<UUID:0x3fd4186323c0 UUID:7cd2feb5-6929-4288-9ea4-c4e68927f289>
 
 Artist.where('uuid = ?', uuid) # This works
 Artist.where('uuid = ?', '7cd2feb5-6929-4288-9ea4-c4e68927f289') # This won't (except on PostgreSQL)
 
 As a result, this also won't work
-Artist.find_by_uuid('7cd2feb5-6929-4288-9ea4-c4e68927f289') 
+Artist.find_by_uuid('7cd2feb5-6929-4288-9ea4-c4e68927f289')
 ```
 
 ## TODO
@@ -212,7 +212,7 @@ Artist.find_by_uuid('7cd2feb5-6929-4288-9ea4-c4e68927f289')
 * Probably other stuff I haven't thought of yet
 
 ## Contributing to has_uuid
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
 * Fork the project.
