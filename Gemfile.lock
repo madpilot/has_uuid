@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    has_uuid (0.2.0)
+    rails_has_uuid (0.2.0)
       activeuuid
       uuidtools
 
@@ -66,8 +66,8 @@ DEPENDENCIES
   appraisal (~> 2.1.0)
   bundler (~> 1.11)
   database_cleaner
-  has_uuid!
   mocha
+  rails_has_uuid!
   rake (~> 10.0)
   rspec (~> 3.0)
   sqlite3
