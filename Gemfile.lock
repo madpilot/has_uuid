@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    has_uuid (0.1.0)
+    has_uuid (0.2.0)
       activeuuid
       uuidtools
 
