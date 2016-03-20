@@ -9,3 +9,4 @@
 /tmp/
 /coverage
 /spec/debug.log
+/gemfiles/*.lock
