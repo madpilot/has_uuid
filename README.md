@@ -14,6 +14,18 @@ Enter: has_uuid
 
 To use has_uuid you mirror all of the primary key id, and foreign key ids with another uuid column, and it makes sure you can search the whole object graph using uuids! If that didn't make sense check this out.
 
+## Installation
+
+_NOTE_ The name of the gem is *rails_has_uuid* because has_uuid was already taken.
+
+Via Gemfile:
+
+```gem 'rails_has_uuid'```
+
+On the commandline
+
+```get install rails_has_uuid```
+
 ## Example
 
 ###Migration
