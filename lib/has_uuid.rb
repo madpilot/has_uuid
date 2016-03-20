@@ -1,3 +1,5 @@
+require "has_uuid/version"
+
 require 'active_support'
 require 'uuidtools'
 require 'activeuuid'
@@ -6,7 +8,7 @@ module HasUuid
   def self.included(base)
     base.send :extend, ClassMethods
   end
-  
+
   module ClassMethods
     def has_uuid(options = {})
       self.class_eval do
@@ -30,11 +32,11 @@ module HasUuid
 
         class_eval do
           before_create :generate_uuids_if_needed
-          
+
           def generate_uuids_if_needed
             unless self.uuid
               begin
-                self.uuid = UUIDTools::UUID.random_create 
+                self.uuid = UUIDTools::UUID.random_create
               end while !HasUuid.check_uuid(self)
             end
           end

@@ -1,4 +1,4 @@
-# has_uuid
+# has_uuid [![Build Status](https://travis-ci.org/madpilot/has_uuid.svg?branch=master)](https://travis-ci.org/madpilot/has_uuid)
 
 A gem to help you retrofit UUIDs to your existing Rails application.
 
@@ -208,6 +208,26 @@ Artist.find_by_uuid('7cd2feb5-6929-4288-9ea4-c4e68927f289')
 * Commit and push until you are happy with your contribution.
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+## Setting up for development environment
+
+has_uuid uses the appraisal gem for testing against multiple versions of Rails.
+
+To get started run:
+
+```appraisal install```
+
+Then to run tests against rails 3.2:
+
+```appraisal rails-3-2 rspec```
+
+Against rails 4.0
+
+```appraisal rails-4-0 rspec```
+
+Against rails 4.1
+
+```appraisal rails-4-1 rspec```
 
 ## Copyright
 

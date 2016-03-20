@@ -1,5 +1,9 @@
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
 require 'rubygems'
 require 'bundler'
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
@@ -7,29 +11,13 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
-require 'simplecov'
-SimpleCov.command_name 'Unit Tests'
-SimpleCov.start do
-  add_filter "/test/" 
-end
-
-require 'test/unit'
-require 'shoulda'
-
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-
-require 'test/unit'
-require 'shoulda'
-require 'mocha/setup'
 
 require 'thread'
 require 'sqlite3'
 require 'rails/all'
 require 'database_cleaner'
+require 'mocha/api'
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'has_uuid'
 
 class TestApp < Rails::Application
@@ -122,11 +110,8 @@ class Song < ActiveRecord::Base
   belongs_to :album
 end
 
-class Test::Unit::TestCase
-  def setup_fixtures
-  end
-
-  def setup_database
+RSpec.configure do |config|
+  config.before(:suite) do
     ActiveRecord::Base.establish_connection({
       :adapter => 'sqlite3',
       :database => ':memory:',
@@ -134,13 +119,14 @@ class Test::Unit::TestCase
     })
     Arel::Table.engine = Arel::Sql::Engine.new(ActiveRecord::Base)
     SetupDatabase.migrate(:up)
+
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
   end
 
-  teardown do
-    DatabaseCleaner.start
-  end
-
-  teardown do
-    DatabaseCleaner.clean
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
   end
 end

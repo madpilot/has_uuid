@@ -11,7 +11,7 @@ module HasUuid
         ::ActiveRecord::Associations::Builder::CollectionAssociation.send :include, HasUuid::ActiveRecord::Associations::Builder::CollectionAssociation
         ::ActiveRecord::Base.send :include, HasUuid
       end
-      
+
       ActiveSupport.on_load :activeuuid do
         # We don't want our ids to be UUIDs so override activeuuid's implementation
         ::ActiveRecord::ConnectionAdapters::Table.send :include, HasUuid::ActiveRecord::ConnectionAdapters::Migrations if defined? ActiveRecord::ConnectionAdapters::Table
