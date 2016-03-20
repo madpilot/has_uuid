@@ -2,10 +2,10 @@ module HasUuid
   module ActiveRecord
     module Associations
       module Builder
-        module Association
+        module SingularAssociation
           extend ActiveSupport::Concern
           included do
-            def self.define_writers_with_uuid
+            def define_writers_with_uuid
               define_writers_without_uuid
 
               mixin.class_eval <<-CODE, __FILE__, __LINE__ + 1
@@ -19,9 +19,7 @@ module HasUuid
               CODE
             end
 
-            class << self
-              alias_method_chain :define_writers, :uuid
-            end
+            alias_method_chain :define_writers, :uuid
           end
         end
       end

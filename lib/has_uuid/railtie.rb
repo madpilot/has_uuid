@@ -7,7 +7,7 @@ module HasUuid
         ::ActiveRecord::Associations::BelongsToAssociation.send :include, HasUuid::ActiveRecord::BelongsToAssociation
         ::ActiveRecord::Associations::SingularAssociation.send :include, HasUuid::ActiveRecord::Associations::SingularAssociation
         ::ActiveRecord::Associations::CollectionAssociation.send :include, HasUuid::ActiveRecord::Associations::CollectionAssociation
-        ::ActiveRecord::Associations::Builder::Association.send :include, HasUuid::ActiveRecord::Associations::Builder::Association
+        ::ActiveRecord::Associations::Builder::SingularAssociation.send :include, HasUuid::ActiveRecord::Associations::Builder::SingularAssociation
         ::ActiveRecord::Associations::Builder::CollectionAssociation.send :include, HasUuid::ActiveRecord::Associations::Builder::CollectionAssociation
         ::ActiveRecord::Base.send :include, HasUuid
       end
