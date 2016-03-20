@@ -1,4 +1,4 @@
-# has_uuid
+# has_uuid [![Build Status](https://travis-ci.org/madpilot/has_uuid.svg?branch=master)](https://travis-ci.org/madpilot/has_uuid)
 
 A gem to help you retrofit UUIDs to your existing Rails application.
 
