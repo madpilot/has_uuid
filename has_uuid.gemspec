@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'has_uuid/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "has_uuid"
+  spec.name          = "rails_has_uuid"
   spec.version       = HasUuid::VERSION
   spec.authors       = ["Myles Eftos"]
   spec.email         = ["myles@madpilot.com.au"]
