@@ -14,8 +14,8 @@ module HasUuid
                 end
               end
             else
-              base.include RedefinedWriter
               base.class_eval do
+                include RedefinedWriter
                 alias_method_chain :define_writers, :uuid_no_args
               end
             end

@@ -17,10 +17,10 @@ module HasUuid
               end
 
             else
-              base.include RedefinedReader
-              base.include RedefinedWriter
-
               base.class_eval do
+                include RedefinedReader
+                include RedefinedWriter
+
                 alias_method_chain :define_readers, :uuid_no_args
                 alias_method_chain :define_writers, :uuid_no_args
               end
