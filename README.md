@@ -209,7 +209,7 @@ Artist.find_by_uuid('7cd2feb5-6929-4288-9ea4-c4e68927f289')
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
-## SEtting up for development environment
+## Setting up for development environment
 
 has_uuid uses the appraisal gem for testing against multiple versions of Rails.
 
