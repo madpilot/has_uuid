@@ -9,7 +9,7 @@ module HasUuid
         ::ActiveRecord::Associations::CollectionAssociation.send :include, HasUuid::ActiveRecord::Associations::CollectionAssociation
         ::ActiveRecord::Associations::Builder::SingularAssociation.send :include, HasUuid::ActiveRecord::Associations::Builder::SingularAssociation
         ::ActiveRecord::Associations::Builder::CollectionAssociation.send :include, HasUuid::ActiveRecord::Associations::Builder::CollectionAssociation
-        ::ActiveRecord::Base.send :include, HasUuid
+        ::ActiveRecord::Base.send :include, HasUuid::Mixin
       end
 
       ActiveSupport.on_load :activeuuid do

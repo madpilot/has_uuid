@@ -4,12 +4,13 @@ module HasUuid
       module Builder
         module CollectionAssociation
           extend ActiveSupport::Concern
+
           def self.included(base)
             if ::ActiveRecord::VERSION::STRING >= "4.1"
-              base.extend RedefinedReader
-              base.extend RedefinedWriter
-
               base.class_eval do
+                base.extend RedefinedReader
+                base.extend RedefinedWriter
+
                 class << self
                   alias_method_chain :define_readers, :uuid_args
                   alias_method_chain :define_writers, :uuid_args

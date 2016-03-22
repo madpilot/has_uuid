@@ -5,47 +5,49 @@ require 'uuidtools'
 require 'activeuuid'
 
 module HasUuid
-  def self.included(base)
-    base.send :extend, ClassMethods
-  end
+  module Mixin
+    def self.included(base)
+      base.send :extend, ClassMethods
+    end
 
-  module ClassMethods
-    def has_uuid(options = {})
-      self.class_eval do
-        cattr_accessor :has_uuid_options
-        self.has_uuid_options = options
-        options[:primary_uuid] ||= :uuid
+    module ClassMethods
+      def has_uuid(options = {})
+        self.class_eval do
+          cattr_accessor :has_uuid_options
+          self.has_uuid_options = options
+          options[:primary_uuid] ||= :uuid
 
-        if options[:primary_uuid] != :uuid
-          class_eval do
-            include ActiveUUID::UUID
+          if options[:primary_uuid] != :uuid
+            class_eval do
+              include ActiveUUID::UUID
 
-            def uuid
-              self.send self.class.primary_uuid
-            end
+              def uuid
+                self.send self.class.primary_uuid
+              end
 
-            def uuid=(uuid)
-              self.send "#{self.class.primary_uuid}=".to_sym, uuid
+              def uuid=(uuid)
+                self.send "#{self.class.primary_uuid}=".to_sym, uuid
+              end
             end
           end
-        end
 
-        class_eval do
-          before_create :generate_uuids_if_needed
+          class_eval do
+            before_create :generate_uuids_if_needed
 
-          def generate_uuids_if_needed
-            unless self.uuid
-              begin
-                self.uuid = UUIDTools::UUID.random_create
-              end while !HasUuid.check_uuid(self)
+            def generate_uuids_if_needed
+              unless self.uuid
+                begin
+                  self.uuid = UUIDTools::UUID.random_create
+                end while !HasUuid.check_uuid(self)
+              end
             end
           end
         end
       end
-    end
 
-    def primary_uuid
-      self.has_uuid_options[:primary_uuid]
+      def primary_uuid
+        self.has_uuid_options[:primary_uuid]
+      end
     end
   end
 
