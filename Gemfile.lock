@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_has_uuid (0.2.0)
+    rails_has_uuid (0.3.0)
       activeuuid
       uuidtools
 
